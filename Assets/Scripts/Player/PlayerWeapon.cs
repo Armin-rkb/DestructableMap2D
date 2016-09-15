@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerWeapon : MonoBehaviour
 {
     // The amount of force we will apply to our bullet.
     [SerializeField]
@@ -11,9 +11,6 @@ public class PlayerMovement : MonoBehaviour
     private BulletController[] bullets;
     // This number will help us indicate which index we are in the bullets array.
     private int bulletNum = 0;
-    // Check if we have shot a bullet.
-    [SerializeField]
-    private bool hasShot = false;
     [SerializeField]
     private Vector3 shootDirection;
 
@@ -25,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
         shootDirection = shootDirection - transform.position;
 
         // Shoot function
-        if (!hasShot && Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             // Increase the amount of power the longer we hold our mouse button.
             StartCoroutine(IncreasePower());
@@ -42,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
         while (true)
         {
             shootPower++;
-            print("POWER UP!!");
             yield return new WaitForSeconds(0.5f);
         }
     }
