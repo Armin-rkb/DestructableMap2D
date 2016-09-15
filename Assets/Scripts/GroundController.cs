@@ -37,7 +37,6 @@ public class GroundController : MonoBehaviour
 
     public void DestroyGround(CircleCollider2D cc)
     {
-        print("Destroy ground!");
         V2int c = World2Pixel(cc.bounds.center.x , cc.bounds.center.y);
         int r = Mathf.RoundToInt((cc.bounds.size.x * widthPixel / widthWorld) / 2);
 

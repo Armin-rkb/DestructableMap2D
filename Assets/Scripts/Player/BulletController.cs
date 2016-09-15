@@ -25,7 +25,6 @@ public class BulletController : MonoBehaviour
         }
         else if (coll.gameObject.CompareTag("Target"))
         {
-            print("target hit!");
             Extensions.Execute<ITarget>(coll.gameObject, x => x.TargetHit());
             Destroy(this.gameObject);
         }
