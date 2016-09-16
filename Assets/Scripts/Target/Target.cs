@@ -3,7 +3,7 @@
 public class Target : MonoBehaviour, ITarget
 {
     public delegate void OnTargetHit(Target target);
-    public static event OnTargetHit AddScore;
+    public static event OnTargetHit TargetDestroyed;
 
     // Amount of points that will be added to the score.
     [SerializeField]
@@ -20,10 +20,9 @@ public class Target : MonoBehaviour, ITarget
     {
         targetManager.AmountOfTargets--;
 
-        if (AddScore != null)
-            AddScore(this);
+        if (TargetDestroyed != null)
+            TargetDestroyed(this);
 
-        print("Targets left: " + targetManager.AmountOfTargets);
         Destroy(this.gameObject);
     }
 }

@@ -28,5 +28,9 @@ public class BulletController : MonoBehaviour
             Extensions.Execute<ITarget>(coll.gameObject, x => x.TargetHit());
             Destroy(this.gameObject);
         }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

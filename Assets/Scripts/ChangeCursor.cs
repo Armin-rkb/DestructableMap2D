@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class ChangeCursor : MonoBehaviour
 {
     [SerializeField]
-    private Sprite cursorSprite;
+    private Texture2D cursorSprite;
 
     void Start()
     {
-        Cursor.SetCursor(cursorSprite.texture, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(cursorSprite, Vector2.zero, CursorMode.Auto);
     }
 
 }

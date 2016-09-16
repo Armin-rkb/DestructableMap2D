@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         StartCoroutine(GroundCheck());
+        TimeCounter.TimeUp += StopScript;
+        TargetCounter.AllTargetsHit += StopScript;
     }
 
     void Update ()
@@ -63,6 +65,12 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.CompareTag("DeathZone"))
+            transform.position = new Vector2(-4, -3);
+    }
+
     void JumpPlayer()
     {
         rbPlayer.velocity = Vector2.up * jumpSpeed;
@@ -71,6 +79,13 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        rbPlayer.AddForce(new Vector2(movement.x * movementSpeed, rbPlayer.velocity.y));
+        rbPlayer.velocity = new Vector2(movement.x * movementSpeed, rbPlayer.velocity.y);
+    }
+
+    void StopScript()
+    {
+        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+        playerMovement.enabled = false;
+        Destroy(rbPlayer);
     }
 }

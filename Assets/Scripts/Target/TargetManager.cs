@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class TargetManager : MonoBehaviour
 {
@@ -13,14 +12,8 @@ public class TargetManager : MonoBehaviour
         set { amountOfTargets = value; }
     }
 
-    void Start()
+    void Awake()
     {
         amountOfTargets = targets.Length;
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-
-	}
 }

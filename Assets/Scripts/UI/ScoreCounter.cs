@@ -12,7 +12,7 @@ public class ScoreCounter : MonoBehaviour
     void Start()
     {
         SetScoreText();
-        Target.AddScore += IncreaseScore;
+        Target.TargetDestroyed += IncreaseScore;
     }
     
     // Increasing our currunt score with a given amount of points.

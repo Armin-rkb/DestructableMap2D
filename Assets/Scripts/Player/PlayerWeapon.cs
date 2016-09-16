@@ -13,6 +13,17 @@ public class PlayerWeapon : MonoBehaviour
     private int bulletNum = 0;
     [SerializeField]
     private Vector3 shootDirection;
+    // Current reload time.
+    [SerializeField]
+    private int reloadTime = 0;
+    // Total reload time.
+    private int maxReloadTime = 15;
+
+    void Start()
+    {
+        TimeCounter.TimeUp += StopScript;
+        TargetCounter.AllTargetsHit += StopScript;
+    }
 
 	void Update ()
     {
@@ -22,16 +33,21 @@ public class PlayerWeapon : MonoBehaviour
         shootDirection = shootDirection - transform.position;
 
         // Shoot function
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && reloadTime <= 0)
         {
             // Increase the amount of power the longer we hold our mouse button.
             StartCoroutine(IncreasePower());
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0) && reloadTime <= 0)
         {
             StopAllCoroutines();
             ShootBullet();
         }
+
+        if (reloadTime > 0)
+            reloadTime--;
+        else
+            reloadTime = 0;
     }
 
     IEnumerator IncreasePower()
@@ -48,7 +64,13 @@ public class PlayerWeapon : MonoBehaviour
         shootPower = Mathf.Clamp(shootPower, 1f, 20);
         BulletController bulletInstance = Instantiate(bullets[bulletNum], transform.position, Quaternion.Euler(Vector3.zero)) as BulletController;
         bulletInstance.DirectBullet(shootDirection, shootPower);
-        //bulletNum++;
+        reloadTime = maxReloadTime;
         shootPower = 0;
+    }
+
+    void StopScript()
+    {
+        PlayerWeapon playerWeapon = GetComponent<PlayerWeapon>();
+        playerWeapon.enabled = false;
     }
 }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class GroundController : MonoBehaviour
 {
@@ -7,6 +6,8 @@ public class GroundController : MonoBehaviour
     private float widthWorld, heigthWorld;
     private int widthPixel, heigthPixel;
     private Color transp;
+    [SerializeField]
+    private string textureName;
 
     void Awake()
     {
@@ -16,7 +17,7 @@ public class GroundController : MonoBehaviour
     void Start()
     {
         // Load our original ground texture from the resources folder.
-        Texture2D tex = (Texture2D)Resources.Load("ground");
+        Texture2D tex = (Texture2D)Resources.Load(textureName);
         // Make a copy of our loaded texture.
         Texture2D tex_clone = (Texture2D)Instantiate(tex);
         sr.sprite = Sprite.Create(tex_clone,
@@ -37,11 +38,15 @@ public class GroundController : MonoBehaviour
 
     public void DestroyGround(CircleCollider2D cc)
     {
+        // Check explosion coordinates
         V2int c = World2Pixel(cc.bounds.center.x , cc.bounds.center.y);
+
+        // pixel explosion radius
         int r = Mathf.RoundToInt((cc.bounds.size.x * widthPixel / widthWorld) / 2);
 
         int x, y, px, nx, py, ny, d;
 
+        // Loop through the cordinates of the blast radius position.
         for (x = 0; x <= r; x++)
         {
             d = (int)Mathf.RoundToInt(Mathf.Sqrt(r * r - x * x));
@@ -67,7 +72,8 @@ public class GroundController : MonoBehaviour
     private V2int World2Pixel(float x, float y)
     {
         V2int v = new V2int();
-
+        
+        // Turn the vector in to pixels.
         float dx = x - transform.position.x;
         v.x = Mathf.RoundToInt(0.5f * widthPixel + dx * widthPixel / widthWorld);
 
