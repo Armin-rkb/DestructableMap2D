@@ -37,4 +37,9 @@ public class TargetCounter : MonoBehaviour
             }
         }
     }
+
+    void OnDestroy()
+    {
+        Target.TargetDestroyed -= DecreaseTargetCount;
+    }
 }

@@ -11,6 +11,7 @@ public class ScoreCounter : MonoBehaviour
 
     void Start()
     {
+        scoreText = GetComponent<Text>();
         SetScoreText();
         Target.TargetDestroyed += IncreaseScore;
     }
@@ -27,5 +28,10 @@ public class ScoreCounter : MonoBehaviour
     {
         // We update here our new scoreCount to be displayed in the UI.
         scoreText.text = "Score: " + scoreCount;
+    }
+
+    void OnDestroy()
+    {
+        Target.TargetDestroyed -= IncreaseScore;
     }
 }

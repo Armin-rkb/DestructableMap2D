@@ -43,4 +43,9 @@ public class TimeCounter : MonoBehaviour
         TimeCounter timeCounter = GetComponent<TimeCounter>();
         timeCounter.enabled = false;
     }
+
+    void OnDestroy()
+    {
+        TargetCounter.AllTargetsHit -= StopScript;
+    }
 }

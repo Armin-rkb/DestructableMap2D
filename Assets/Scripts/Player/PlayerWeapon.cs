@@ -25,7 +25,7 @@ public class PlayerWeapon : MonoBehaviour
         TargetCounter.AllTargetsHit += StopScript;
     }
 
-	void Update ()
+    void Update()
     {
         // Setting our shootDirection equal to our mouse position.
         shootDirection = Input.mousePosition;
@@ -72,5 +72,11 @@ public class PlayerWeapon : MonoBehaviour
     {
         PlayerWeapon playerWeapon = GetComponent<PlayerWeapon>();
         playerWeapon.enabled = false;
+    }
+
+    void OnDestroy()
+    {
+        TimeCounter.TimeUp -= StopScript;
+        TargetCounter.AllTargetsHit -= StopScript;
     }
 }
