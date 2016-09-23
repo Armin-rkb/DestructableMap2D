@@ -11,6 +11,7 @@ public class RestartGame : MonoBehaviour
         // Hide our button when the game starts.
         restartButton.SetActive(false);
 
+        PlayerDeath.OnDeath += ActivateButton;
         TargetCounter.AllTargetsHit += ActivateButton;
         TimeCounter.TimeUp += ActivateButton;
     }
@@ -28,6 +29,7 @@ public class RestartGame : MonoBehaviour
 
     void OnDestroy()
     {
+        PlayerDeath.OnDeath -= ActivateButton;
         TargetCounter.AllTargetsHit -= ActivateButton;
         TimeCounter.TimeUp -= ActivateButton;
     }

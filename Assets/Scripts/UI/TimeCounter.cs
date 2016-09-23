@@ -8,32 +8,32 @@ public class TimeCounter : MonoBehaviour
 
     [SerializeField]
     private Text timeText;
-    [SerializeField]
-    private float timeLeft;
+    private float startTime = 0;
 	
     void Start()
     {
+        PlayerDeath.OnDeath += StopScript;
         TargetCounter.AllTargetsHit += StopScript;
     }
 
     void Update ()
     {
-        if (timeLeft > 0)
+        if (startTime < 60)
             CountDownTime();
         else
         {
             if (TimeUp != null)
                 TimeUp();
-            timeText.text = "Time Left: 00 : 00";
+            timeText.text = "Time Left: 60 : 00";
         }
 	}
 
     void CountDownTime()
     {
-        timeLeft -= Time.deltaTime;
+        startTime += Time.deltaTime;
 
-        float sec = timeLeft % 60;
-        float fraction = (timeLeft * 100) % 60;
+        float sec = startTime % 60;
+        float fraction = (startTime * 100) % 60;
 
         timeText.text = string.Format("Time Left: {0:00} : {1:00}", Mathf.Floor(sec), fraction);
     }
@@ -46,6 +46,7 @@ public class TimeCounter : MonoBehaviour
 
     void OnDestroy()
     {
+        PlayerDeath.OnDeath -= StopScript;
         TargetCounter.AllTargetsHit -= StopScript;
     }
 }

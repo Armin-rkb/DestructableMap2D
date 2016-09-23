@@ -8,6 +8,8 @@ public class BulletController : MonoBehaviour
     private CircleCollider2D destructionCircle;
     [SerializeField]
     private GroundController groundController;
+    [SerializeField]
+    private GameObject explosionEffect;
 
     public void DirectBullet(Vector2 dir, float power)
     {
@@ -19,6 +21,7 @@ public class BulletController : MonoBehaviour
     {
         if (coll.gameObject.CompareTag("Ground"))
         {
+            Instantiate(explosionEffect, transform.position, transform.rotation);
             groundController = coll.gameObject.GetComponent<GroundController>();
             groundController.DestroyGround(destructionCircle);
             Destroy(this.gameObject);

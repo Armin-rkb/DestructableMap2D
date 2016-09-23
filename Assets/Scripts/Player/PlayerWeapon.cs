@@ -27,11 +27,6 @@ public class PlayerWeapon : MonoBehaviour
 
     void Update()
     {
-        // Setting our shootDirection equal to our mouse position.
-        shootDirection = Input.mousePosition;
-        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-        shootDirection = shootDirection - transform.position;
-
         // Shoot function
         if (Input.GetMouseButton(0) && reloadTime <= 0)
         {
@@ -61,6 +56,12 @@ public class PlayerWeapon : MonoBehaviour
 
     void ShootBullet()
     {
+        // Setting our shootDirection equal to our mouse position.
+        shootDirection = Input.mousePosition;
+        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+        shootDirection = shootDirection - transform.position;
+
+        // Clamp our shooting power and spawn the bullet.
         shootPower = Mathf.Clamp(shootPower, 1f, 20);
         BulletController bulletInstance = Instantiate(bullets[bulletNum], transform.position, Quaternion.Euler(Vector3.zero)) as BulletController;
         bulletInstance.DirectBullet(shootDirection, shootPower);
