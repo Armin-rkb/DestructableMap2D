@@ -28,11 +28,13 @@ public class BulletController : MonoBehaviour
         }
         else if (coll.gameObject.CompareTag("Target"))
         {
+            Instantiate(explosionEffect, transform.position, transform.rotation);
             Extensions.Execute<ITarget>(coll.gameObject, x => x.TargetHit());
             Destroy(this.gameObject);
         }
         else
         {
+            Instantiate(explosionEffect, transform.position, transform.rotation);
             Destroy(this.gameObject);
         }
     }

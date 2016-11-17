@@ -11,26 +11,25 @@ public class TargetCounter : MonoBehaviour
     [SerializeField]
     private Text targetText;
     private int maxTargets;
-    private int targetsLeft;
+    private int targetsHit = 0;
 
     void Start()
     {
         maxTargets = targetManager.AmountOfTargets;
-        targetsLeft = maxTargets;
-        targetText.text = "Targets: " + targetsLeft + " / " + maxTargets;
+        targetText.text = targetsHit + " / " + maxTargets;
         Target.TargetDestroyed += DecreaseTargetCount;
     }
 
     void DecreaseTargetCount(Target target)
     {
-        // If we still have have targets left; remove 1 target.
-        if (targetsLeft != 0)
+        // If we still have have targets left; add 1 hit target.
+        if (targetsHit != maxTargets )
         {
-            targetsLeft--;
-            targetText.text = "Targets: " + targetsLeft + " / " + maxTargets;
+            targetsHit++;
+            targetText.text = targetsHit + " / " + maxTargets;
 
             // If all targets are hit; pause the game.
-            if (targetsLeft == 0)
+            if (targetsHit == maxTargets)
             {
                 if (AllTargetsHit != null)
                     AllTargetsHit();

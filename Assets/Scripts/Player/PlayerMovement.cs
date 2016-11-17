@@ -43,12 +43,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update ()
     {
-        /*
-        if (rbPlayer.velocity.x > 10)
-            print(rbPlayer.velocity);
-            */
         // Check if we hit our horizontal movement input.
         moveX = Input.GetAxis("Horizontal");
+        
         // Store the value in a vector2.
         movement = new Vector2(moveX, 0);
 
@@ -95,7 +92,6 @@ public class PlayerMovement : MonoBehaviour
     void MovePlayer()
     {
         rbPlayer.velocity = new Vector2(movement.x * movementSpeed, rbPlayer.velocity.y);
-        //rbPlayer.AddForce(new Vector2(movement.x * movementSpeed, rbPlayer.velocity.y));
     }
 
     void StopScript()
