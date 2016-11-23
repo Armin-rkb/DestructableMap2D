@@ -10,7 +10,7 @@ public class PlayerDeath : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll)
     {
         // If we hit the deathzones of the screen, hide our player and display the restart button.
-        if (coll.gameObject.CompareTag("DeathZone"))
+        if (coll.gameObject.CompareTag(Tags.deathZone))
         {
             PlayerDied();
         }

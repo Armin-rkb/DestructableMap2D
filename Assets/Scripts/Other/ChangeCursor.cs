@@ -9,5 +9,4 @@ public class ChangeCursor : MonoBehaviour
     {
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
     }
-
 }

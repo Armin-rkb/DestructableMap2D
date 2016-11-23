@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GroundController : MonoBehaviour
+public class DestructableGround : MonoBehaviour
 {
     private SpriteRenderer sr;
     private float widthWorld, heigthWorld;

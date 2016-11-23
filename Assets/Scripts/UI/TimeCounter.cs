@@ -24,7 +24,7 @@ public class TimeCounter : MonoBehaviour
         {
             if (TimeUp != null)
                 TimeUp();
-            timeText.text = "Time Left: 60 : 00";
+            timeText.text = "Time: 60 : 00";
         }
 	}
 
@@ -35,7 +35,7 @@ public class TimeCounter : MonoBehaviour
         float sec = startTime % 60;
         float fraction = (startTime * 100) % 60;
 
-        timeText.text = string.Format("Time Left: {0:00} : {1:00}", Mathf.Floor(sec), fraction);
+        timeText.text = string.Format("Time: {0:00} : {1:00}", Mathf.Floor(sec), fraction);
     }
 
     void StopScript()

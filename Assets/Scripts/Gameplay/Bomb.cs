@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-public class BulletController : MonoBehaviour
+public class Bomb : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody2D rbBullet;
     [SerializeField]
     private CircleCollider2D destructionCircle;
     [SerializeField]
-    private GroundController groundController;
+    private DestructableGround destructableGround;
     [SerializeField]
     private GameObject explosionEffect;
 
@@ -19,14 +19,14 @@ public class BulletController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.CompareTag("Ground"))
+        if (coll.gameObject.CompareTag(Tags.ground))
         {
             Instantiate(explosionEffect, transform.position, transform.rotation);
-            groundController = coll.gameObject.GetComponent<GroundController>();
-            groundController.DestroyGround(destructionCircle);
+            destructableGround = coll.gameObject.GetComponent<DestructableGround>();
+            destructableGround.DestroyGround(destructionCircle);
             Destroy(this.gameObject);
         }
-        else if (coll.gameObject.CompareTag("Target"))
+        else if (coll.gameObject.CompareTag(Tags.target))
         {
             Instantiate(explosionEffect, transform.position, transform.rotation);
             Extensions.Execute<ITarget>(coll.gameObject, x => x.TargetHit());
